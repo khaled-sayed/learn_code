@@ -8,6 +8,8 @@ class Track extends Model
 {
     protected $fillabel = ['name'];
 
+    protected $guarded = ['id']; 
+
     public function users(){
         return $this->belongsToMany('App\User');
     }

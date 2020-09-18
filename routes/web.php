@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth', 'admin'] ], function () {
 	Route::resource('admin/admins', 'Admin\AdminController', ['except' => ['show']]);
 
 	Route::resource('admin/users', 'Admin\UserController', ['except' => ['show']]);
+	Route::resource('admin/tracks', 'Admin\TrackController');
 
 	Route::get('admin/profile', ['as' => 'profile.edit', 'uses' => 'Admin\ProfileController@edit']);
 	
