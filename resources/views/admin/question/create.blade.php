@@ -46,7 +46,6 @@
                                     @endif
                                 </div>
 
-                                <div class="pl-lg-4">
                                     <div class="form-group{{ $errors->has('right_answer') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-title">{{ __('Right Answer') }}</label>
                                         <input type="text" name="right_answer" id="input-title" class="form-control form-control-alternative{{ $errors->has('right_answer') ? ' is-invalid' : '' }}" placeholder="{{ __('Right Answer') }}" value="{{ old('right_answer') }}" required autofocus>
@@ -57,7 +56,6 @@
                                             </span>
                                         @endif
                                     </div>
-                                </div>
 
                                 <div class="form-group{{ $errors->has('score') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-track">{{ __('Score') }}</label>

@@ -37,7 +37,22 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'title' => 'required|min:20|max:1000',
+            'answers' => 'required|min:10|max:1000',
+            'right_answer' => 'required|min:3|max:50',
+            'quiz_id' => 'required|integer',
+            'score' => 'required|integer|min:5|max:30'
+        ];
+        $this->validate($request, $rules);
+
+        $question = Question::create($request->all());
+
+        if($question) {
+            return redirect('/admin/questions')->withStatus('Create Question Successfully .');
+        } else {
+            return redirect('/admin/questions/create')->withStatus('Something Wrong , Try Agin .');
+        }
     }
 
     /**
