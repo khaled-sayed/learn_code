@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    protected $fillabel = ['name'];
+    protected $fillabel = ['name', 'course_id'];
+    protected $guarded = ['id']; 
 
     public function question(){
         return $this->hasMany('App\Question');

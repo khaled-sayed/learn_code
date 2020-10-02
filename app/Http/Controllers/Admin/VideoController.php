@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Track;
+use App\Video;
 use Illuminate\Http\Request;
 
-class TrackController extends Controller
+class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class TrackController extends Controller
      */
     public function index()
     {
-        $tracks = Track::orderBy('id', 'desc')->paginate(20);
-
-        return view('admin.tracks.index', compact('tracks'));
+        $videos = Video::orderBy('id', 'desc')->paginate(20);
+        return view('admin.videos.index', compact('videos'));
     }
 
     /**
@@ -27,7 +26,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.videos.create');
     }
 
     /**
@@ -39,15 +38,19 @@ class TrackController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|min:3|max:50'
+            'title' => 'required|min:10|max:100',
+            'link' => 'required|url',
+            'course_id' => 'required|int'
         ];
 
         $this->validate($request, $rules);
 
-        if(Track::create($request->all())){
-            return redirect('/admin/tracks')->withStatus('Track Successfully Created');
+        $video = Video::create($request->all());
+
+        if($video) {
+            return redirect('/admin/videos')->withStatus('Video Successfully Created.');
         } else {
-            return redirect('/admin/tracks')->withStatus('Something Wrong, Try Agin');
+            return redirect('/admin/videos/create')->withStatus('Video Not Created.');
         }
     }
 
@@ -57,9 +60,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Track $track)
+    public function show(Video $video)
     {
-        return view('admin.tracks.show', compact('track'));
+        return view('admin.videos.show', compact('video'));
     }
 
     /**
@@ -68,9 +71,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Track $track)
+    public function edit(Video $video)
     {
-        return view('admin.tracks.edit', compact('track'));
+        return view('admin.videos.edit', compact('video'));
     }
 
     /**
@@ -80,23 +83,22 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Track $track)
+    public function update(Request $request,Video $video)
     {
         $rules = [
-            'name' => 'required|min:3|max:50'
+            'title' => 'required|min:10|max:100',
+            'link' => 'required|url',
+            'course_id' => 'required|int'
         ];
 
         $this->validate($request, $rules);
 
-        if($request->has('name')){
-            $track->name = $request->name;
-        }
+        $video->update($request->all());
 
-        if($track->isDirty()) {
-            $track->save();
-            return redirect('/admin/tracks')->withStatus('Track Successfully Updated');
+        if($video) {
+            return redirect('/admin/videos')->withStatus('Video Successfully Updated.');
         } else {
-            return redirect('/admin/tracks/'.$track->id.'/edit')->withStatus('Something Wrong, Try Agin');
+            return redirect('/admin/videos/'. $video->id .'/edit')->withStatus('Video Not Update.');
         }
     }
 
@@ -106,9 +108,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Track $track)
+    public function destroy(Video $video)
     {
-        $track->delete();
-        return redirect('/admin/tracks')->withStatus('Track Successfully Deleted');
+        $video->delete();
+        return redirect('/admin/videos')->withStatus('Video Successfully Deleted .');
     }
 }

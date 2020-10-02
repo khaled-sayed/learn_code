@@ -36,6 +36,13 @@ Route::group(['middleware' => ['auth', 'admin'] ], function () {
 
 	Route::resource('admin/users', 'Admin\UserController', ['except' => ['show']]);
 	Route::resource('admin/tracks', 'Admin\TrackController');
+	Route::resource('admin/track.courses', 'Admin\TrackCourseController');
+	Route::resource('admin/courses', 'Admin\CourseController');
+	Route::resource('admin/courses.videos', 'Admin\courseVideoController');
+	Route::resource('admin/courses.quizzes', 'Admin\CourseQuizController');
+	Route::resource('admin/videos', 'Admin\VideoController');
+	Route::resource('admin/quizzes', 'Admin\QuizzeController');
+	Route::resource('admin/questions', 'Admin\QuestionController');
 
 	Route::get('admin/profile', ['as' => 'profile.edit', 'uses' => 'Admin\ProfileController@edit']);
 	

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    protected $fillabel = ['title','status'];
+    protected $fillabel = ['title','status', 'link', 'track_id'];
+    protected $guarded = ['id']; 
 
     protected $timestamp = false;
 

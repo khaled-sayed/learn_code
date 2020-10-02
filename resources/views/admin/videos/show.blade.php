@@ -1,0 +1,12 @@
+@extends('layouts.app', ['title' => __('Videos Management')])
+
+@section('content')
+    @include('layouts.headers.cards')
+
+    <div class="text-center">
+        <iframe width="560" height="315" src="{{$video->link}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+            
+        @include('layouts.footers.auth')
+    </div>
+@endsection

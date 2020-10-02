@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => __('Tracks Management')])
+@extends('layouts.app', ['title' => __('Videos Management')])
 
 @section('content')
     @include('layouts.headers.cards')
@@ -10,7 +10,10 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Tracks') }}</h3>
+                                <h3 class="mb-0">{{ __('Videos') }}</h3>
+                            </div>
+                            <div class="col-4 text-right">
+                                <a href="{{ route('videos.create') }}" class="btn btn-sm btn-primary">{{ __('Add Video') }}</a>
                             </div>
                         </div>
                     </div>
@@ -31,50 +34,36 @@
                             </div>
                         @endif
                     </div>
-
-                    <form action="{{route('tracks.store')}}" method="POST" autocomplete="off">
-                        @csrf
-                        <div class="row">
-                            <div class="col-sm-8 offset-md-2">
-                                <div class="form-group">
-                                    <input placeholder="Track Name" type="text" name="name" class="form-control" id="nameOfTrack">
-                                </div>
-                            </div>
-                            <div class="col-sm">
-                                <input type="submit" value="Add Track" class="btn btn-primary">
-                            </div>
-                        </div>
-                    </form>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('No Courses') }}</th>
+                                    <th scope="col">{{ __('Title') }}</th>
+                                    <th scope="col">{{ __('Course Name') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($tracks))
-                                @foreach ($tracks as $track)
+                                @if (count($videos))
+                                @foreach ($videos as $video)
                                     <tr>
-                                    <td><a href="/admin/tracks/{{$track->id}}">{{ $track->name }}</a></td>
+                                    <td title="{{$video->title}}"><a href="{{route('videos.show', $video)}}">{{Str::limit($video->title, 50)}}</a></td>
                                         <td>
-                                            {{count($track->courses)}} Courses
+                                            <a href="/admin/courses/{{$video->course->id}}">{{Str::limit($video->course->title, 50)}}</a>
                                         </td>
-                                        <td>{{ $track->created_at->diffForHumans() }}</td>
+                                        <td>{{ $video->created_at->diffForHumans() }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <form action="{{ route('tracks.destroy', $track) }}" method="post">
+                                                    <form action="{{ route('videos.destroy', $video) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         
-                                                        <a class="dropdown-item" href="{{ route('tracks.edit', $track) }}">{{ __('Edit') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('videos.edit', $video) }}">{{ __('Edit') }}</a>
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this Track?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Delete') }}
                                                         </button>
@@ -90,7 +79,7 @@
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
-                            {{ $tracks->links() }}
+                            {{ $videos->links() }}
                         </nav>
                     </div>
                 </div>

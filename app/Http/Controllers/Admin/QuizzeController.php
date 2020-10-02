@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Track;
+use App\Quiz;
 use Illuminate\Http\Request;
 
-class TrackController extends Controller
+class QuizzeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class TrackController extends Controller
      */
     public function index()
     {
-        $tracks = Track::orderBy('id', 'desc')->paginate(20);
-
-        return view('admin.tracks.index', compact('tracks'));
+        $quizzes = Quiz::orderBy('id', 'desc')->paginate(20);
+        return view('admin.quizzes.index', compact('quizzes'));
     }
 
     /**
@@ -27,7 +26,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.quizzes.create');
     }
 
     /**
@@ -39,15 +38,18 @@ class TrackController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|min:3|max:50'
+            'name' => 'required|min:10|max:100',
+            'course_id' => 'required|int' 
         ];
 
         $this->validate($request, $rules);
 
-        if(Track::create($request->all())){
-            return redirect('/admin/tracks')->withStatus('Track Successfully Created');
+        $quiz = Quiz::create($request->all());
+
+        if($quiz) {
+            return redirect('/admin/quizzes')->withStatus('Quiz Successfully Created .');
         } else {
-            return redirect('/admin/tracks')->withStatus('Something Wrong, Try Agin');
+            return redirect('/admin/quizzes/create')->withStatus('Something Wrong , Try Agin');
         }
     }
 
@@ -57,9 +59,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Track $track)
+    public function show(Quiz $quiz)
     {
-        return view('admin.tracks.show', compact('track'));
+        return view('admin.quizzes.show', compact('quiz'));
     }
 
     /**
@@ -68,9 +70,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Track $track)
+    public function edit(Quiz $quiz)
     {
-        return view('admin.tracks.edit', compact('track'));
+        return view('admin.quizzes.edit', compact('quiz'));
     }
 
     /**
@@ -80,23 +82,21 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Track $track)
+    public function update(Request $request, Quiz $quiz)
     {
         $rules = [
-            'name' => 'required|min:3|max:50'
+            'name' => 'required|min:10|max:100',
+            'course_id' => 'required|int' 
         ];
 
         $this->validate($request, $rules);
 
-        if($request->has('name')){
-            $track->name = $request->name;
-        }
+        $quiz->create($request->all());
 
-        if($track->isDirty()) {
-            $track->save();
-            return redirect('/admin/tracks')->withStatus('Track Successfully Updated');
+        if($quiz) {
+            return redirect('/admin/quizzes')->withStatus('Quiz Successfully Updated .');
         } else {
-            return redirect('/admin/tracks/'.$track->id.'/edit')->withStatus('Something Wrong, Try Agin');
+            return redirect('/admin/quizzes/'.$quiz->id.'/edit')->withStatus('Something Wrong , Try Agin');
         }
     }
 
@@ -106,9 +106,9 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Track $track)
+    public function destroy(Quiz $quiz)
     {
-        $track->delete();
-        return redirect('/admin/tracks')->withStatus('Track Successfully Deleted');
+        $quiz->delete();
+        return redirect('/admin/quizzes')->withStatus('Quiz Successfully Deleted .');
     }
 }

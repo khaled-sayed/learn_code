@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Course;
 use App\Http\Controllers\Controller;
+use App\photo;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -14,7 +16,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::orderBy('id','desc')->paginate(15);
+        return view('admin.courses.index', compact('courses'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.courses.create');
     }
 
     /**
@@ -35,7 +38,35 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules= [
+            'title'=> 'required|min:20|max:150',
+            'status' => 'required|integer|in:0,1',
+            'link' => 'required',
+            'track_id' => 'required|integer'
+        ];
+        
+        $this->validate($request, $rules);
+
+        $course = Course::create($request->all());
+
+        if($course){
+            // Insert The image
+            if($file = $request->file('image')) {
+                $filename = $file->getClientOriginalName();
+                $fileExtention = $file->getClientOriginalExtension();
+                
+                $file_to_store = time() . '_' . explode('.',$filename)[0] . '_.' . $fileExtention;
+
+                if($file->move('courses', $file_to_store)) {
+                    photo::create([
+                        'filename'=>$file_to_store,
+                        'photoable_id'=> $course->id, 
+                        'photoable_type'=> 'App\Course', 
+                        ]);
+                }
+            }
+            return redirect('/admin/courses')->withStatus('Course Succsessfully Created');
+        }
     }
 
     /**
@@ -44,9 +75,9 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Course $course)
     {
-        //
+        return view('admin.courses.show', compact('course'));
     }
 
     /**
@@ -55,9 +86,9 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        return view('admin.courses.edit', compact('course'));
     }
 
     /**
@@ -67,9 +98,45 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Course $course)
     {
-        //
+        $rules= [
+            'title'=> 'required|min:20|max:150',
+            'status' => 'required|integer|in:0,1',
+            'link' => 'required',
+            'track_id' => 'required|integer'
+        ];
+        
+        $this->validate($request, $rules);
+
+        $course->update($request->all());
+
+        // Insert The image
+        if($file = $request->file('image')) {
+            $filename = $file->getClientOriginalName();
+            $fileExtention = $file->getClientOriginalExtension();
+            
+            $file_to_store = time() . '_' . explode('.',$filename)[0] . '_.' . $fileExtention;
+
+            if($file->move('courses', $file_to_store)) {
+                if($course->photo){
+                    $photo = $course->photo;
+                    // remove the old image
+                    $filename = $photo->filename;
+                    unlink('courses/'.$filename);
+
+                    $photo->filename = $file_to_store;
+                    $photo->save();
+                } else {
+                    photo::create([
+                        'filename'=>$file_to_store,
+                        'photoable_id'=> $course->id, 
+                        'photoable_type'=> 'App\Course', 
+                        ]);
+                }
+            }
+        }
+        return redirect('/admin/courses')->withStatus('Course Succsessfully Updated');
     }
 
     /**
@@ -78,8 +145,16 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        # Delete Photo From Server
+        if($course->photo){
+            $filename = $course->photo->filename;
+            unlink('courses/'.$filename);
+        }
+        # Delete Photo From DB
+        $course->photo->delete();
+        $course->delete();
+        return redirect('/admin/courses')->withStatus('Course Succsessfully Deleted');
     }
 }
