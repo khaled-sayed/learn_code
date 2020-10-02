@@ -38,7 +38,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title' => 'required|min:20|max:1000',
+            'title' => 'required|min:10|max:1000',
             'answers' => 'required|min:10|max:1000',
             'right_answer' => 'required|min:3|max:50',
             'quiz_id' => 'required|integer',
@@ -61,9 +61,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        //
+        
     }
 
     /**
@@ -72,9 +72,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('admin.question.edit', compact('question'));
     }
 
     /**
@@ -84,9 +84,24 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question)
     {
-        //
+        $rules = [
+            'title' => 'required|min:10|max:1000',
+            'answers' => 'required|min:10|max:1000',
+            'right_answer' => 'required|min:3|max:50',
+            'quiz_id' => 'required|integer',
+            'score' => 'required|integer|min:5|max:30'
+        ];
+        $this->validate($request, $rules);
+
+        $question->update($request->all());
+
+        if($question) {
+            return redirect('/admin/questions')->withStatus('Question Successfully Updated.');
+        } else {
+            return redirect('/admin/questions/create')->withStatus('Something Wrong , Try Agin .');
+        }
     }
 
     /**
@@ -95,8 +110,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        return redirect('/admin/questions')->withStatus('Delete Question Successfully .');
     }
 }
