@@ -6,7 +6,8 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            {{-- <h2>Learn Code</h2> --}}
+             <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -133,27 +134,27 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/tracks">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Tracks') }}
+                        <i class="fas fa-chart-bar text-orange"></i> {{ __('Tracks') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/courses">
-                        <i class="ni ni-planet text-blue"></i> {{ __('Courses') }}
+                        <i class="fas fa-chalkboard-teacher text-orange"></i> {{ __('Courses') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/videos">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Videos') }}
+                        <i class="fab fa-youtube text-orange"></i> {{ __('Videos') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/quizzes">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Quizzes') }}
+                        <i class="fas fa-edit text-orange"></i> {{ __('Quizzes') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/questions">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Questions') }}
+                        <i class="fas fa-question text-orange"></i> {{ __('Questions') }}
                     </a>
                 </li>
             </ul>

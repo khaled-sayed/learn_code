@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+@extends('layouts.user_layout')
 
-	This is home page
-
-</body>
-</html>
-
+@section('content')
+	@include('layouts.includes.home_pic')
+	@include('layouts.includes.mycourses')
+@endsection

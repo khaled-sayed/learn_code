@@ -1,0 +1,304 @@
+/* Main Color: #1c5996; */
+/* Secondary Color: #964b1c; */
+
+
+/* Constant */
+
+
+body {
+	padding-top: 56px;
+}
+.text-blue {
+	color: #1c5996 !important;
+}
+
+/* Home page */
+
+.search-form {
+	margin-left: 250px;
+}
+.search-form,
+.search-form input {
+	width: 500px !important;
+	border-radius: 0;
+}
+
+.links ul {
+	margin-right: 40px;
+}
+.links ul li {
+	margin-right: 10px;
+}
+
+.navbar  {
+	background-color: #1c5996!important;
+}
+
+.navbar div a.navbar-brand,
+.navbar div ul li a.nav-link  {
+	color: #fff!important;
+}
+
+.navbar span.logo {
+	background-color: #fff;
+	color: #1c5996;
+	padding: 8px;
+	border-radius: 10px 20px;
+}
+
+.home_pic {
+	height: 94vh;
+	background-image: url(../argon/img/14793.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-origin: content-box;
+	position: relative;
+}
+
+.overlay {
+	background-color: rgba(0, 0, 0, .5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.home_pic .overlay .background-text {
+	padding-top: 12%;
+    color: #e0e0e0;
+    padding-left: 9%;
+}
+
+@media screen and (max-width:768px){
+	.home_pic .overlay .background-text {
+		padding: 0;
+	}
+}
+
+.home_pic .overlay .background-text p:first-of-type {
+	font-size: 80px;
+}
+
+.home_pic .overlay .background-text p:last-of-type {
+	font-size: 40px;
+}
+
+.home_pic .overlay .background-text a {
+	background-color: #1c5996!important;
+	border: 0;
+	padding: 10px 25px;
+    font-size: 20px;
+}
+.home_pic .overlay .background-text a:focus,.home_pic .overlay .background-text a:hover {border: 0;}
+
+/*.carousel {
+	margin-left: 150px;
+}
+
+.carousel .course img{
+	width: 300px;
+	height: 300px;
+}
+.mdb-lightbox [class*=col-] {
+    padding: 0 !important;
+}
+*/
+/* User Courses Carusel */
+
+.carousel {
+    margin-top: 30px;
+}
+#courses-header {
+    margin-bottom: 30px;
+}
+#courses-header h4 {
+    display: inline-block;
+    margin-left: 220px;
+    float: left;
+    font-family: 'Lato';
+}
+#courses-header a {
+    font-size: 20px;
+    float: right;
+    margin-right: 220px;
+    text-decoration: none;
+}
+.carousel .course img {
+    width: 300px;
+    height: 200px;
+    margin-left: -15px;
+}
+.carousel .course figure {
+    margin: 0;
+    padding: 0;
+}
+.carousel .course .col-sm-4,
+.carousel .course .col-sm-4 {
+    background-color: #f3f4f5;
+}
+.course a {
+    text-decoration: none;
+    font-family: 'Lato';
+    margin-top: 10px;
+    color: #000;
+}
+
+
+.carousel .left-arrow,
+.carousel .right-arrow {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 1000;
+    color: #eaeaea;
+    background: #1c5996;
+    transition: .3s ease-in-out;
+}
+.carousel .left-arrow:hover,
+.carousel .right-arrow:hover {
+    color: #1c5996;
+    background: #eaeaea;
+}
+.carousel .left-arrow {
+    top: 150px;
+    left: 100px;
+    padding-top: 12px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.carousel .right-arrow {
+    top: 150px;
+    right: 100px;
+    padding-top: 12px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+
+/* Famouse Track Courses */
+
+.famous-courses {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.famous-courses h4 {
+    margin-bottom: 20px;
+    margin-top: 50px;
+    font-family: 'Lato';
+}
+.famous-courses .course {
+    border: 1px solid #eaeaea;
+    padding-bottom: 20px;
+    box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+}
+
+.famous-courses .course h6 {
+    padding: 10px;
+    min-height: 60px;
+}
+.famous-courses .course img {
+    width: 255px;
+    height: 170px;
+    transition: .1s ease-in-out;
+}
+
+.famous-courses .course img:hover {
+    opacity: .8;
+}
+
+/* Famous Tracks */
+
+.famous-tracks {
+    margin-top: 20px;
+}
+.famous-tracks .tracks ul li:nth-child(1),
+.famous-tracks .tracks ul li:nth-child(6) {
+    margin-left: 5px;
+}
+.famous-tracks .tracks ul li {
+    display: inline-block;
+    padding: 10px 0 10px 5px;
+    width: 18%;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+}
+
+.famous-tracks .tracks ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    font-size: 22px;
+    background-color: #fff;
+    color: #505050;
+}
+
+/* Recommended Courses */
+
+.recommended-courses .courses .course .course-image {
+    width: 100%;
+}
+.recommended-courses .courses .course .course-image img {
+    width: 100%;
+    height: 80px;
+}
+.recommended-courses .courses .course {
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+.recommended-courses .courses .course .course-details .course-title{
+    padding-top: 10px;
+}
+
+
+/* Footer */
+
+
+footer {
+    background-color: #1a4e82;
+}
+
+footer .row > .col-md-4 {
+    color: #fff;
+}
+
+footer .row .col-md-2 {
+    color: #fff;
+}
+
+footer .row .col-md-2 ul li a {
+    color: #bdbdbd;
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+
+footer .row .col-md-2 ul li a:hover {
+    color: #fff;
+}
+
+footer > ul li h5,
+footer > ul li a {
+    color: #fff!important;
+    font-weight: 300!important;
+}
+
+footer > ul li a {
+    padding: .84rem 2.14rem!important;
+    border-radius: 10em!important;
+    font-weight: bold!important;
+}
+
+
+footer div.footer-copyright {
+    background-color: #0c3763;
+    color: #bdbdbd;
+}
+footer div.footer-copyright a {
+    color: #fff;
+    text-decoration: none;
+}

@@ -13,16 +13,14 @@
 
 // User Routes
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// Admin Routes 
+// Admin Routes
 
 Route::group(['middleware' => ['auth', 'admin'] ], function () {
 
@@ -46,9 +44,9 @@ Route::group(['middleware' => ['auth', 'admin'] ], function () {
 	Route::resource('admin/questions', 'Admin\QuestionController');
 
 	Route::get('admin/profile', ['as' => 'profile.edit', 'uses' => 'Admin\ProfileController@edit']);
-	
+
 	Route::put('admin/profile', ['as' => 'profile.update', 'uses' => 'Admin\ProfileController@update']);
-	
+
 	Route::put('admin/profile/password', ['as' => 'profile.password', 'uses' => 'Admin\ProfileController@password']);
 });
 
