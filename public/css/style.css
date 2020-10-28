@@ -67,15 +67,11 @@ body {
 
 .home_pic .overlay .background-text {
 	padding-top: 12%;
-    color: #e0e0e0;
-    padding-left: 9%;
+    color: #fff;
+    text-align: center;
+
 }
 
-@media screen and (max-width:768px){
-	.home_pic .overlay .background-text {
-		padding: 0;
-	}
-}
 
 .home_pic .overlay .background-text p:first-of-type {
 	font-size: 80px;
@@ -84,15 +80,47 @@ body {
 .home_pic .overlay .background-text p:last-of-type {
 	font-size: 40px;
 }
-
+.home_pic .overlay .background-text .buttons {
+    margin-top: 3rem;
+}
 .home_pic .overlay .background-text a {
-	background-color: #1c5996!important;
+	background-color: #1c5996 !important;
 	border: 0;
-	padding: 10px 25px;
-    font-size: 20px;
+	padding: 10px 25px !important;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: #fff;
+    transition: all 1s ease-in-out;
+    text-transform: uppercase;
+}
+.home_pic .overlay .background-text a.custom-btn {
+    background-color: transparent !important;
+    color: #fff;
+    border: 1px solid #1c5996;
+    margin-left: 5rem;
+
+}
+.home_pic .overlay .background-text a.custom-btn:hover {
+    background: #1c5996 !important;
+    border: 1px solid #fff;
 }
 .home_pic .overlay .background-text a:focus,.home_pic .overlay .background-text a:hover {border: 0;}
-
+@media screen and (max-width:768px){
+    .home_pic .overlay .background-text {
+        padding: 10rem 0;
+    }
+    .home_pic .overlay .background-text  p:first-child {
+        font-size: 55px;
+    }
+    .home_pic .overlay .background-text  p:last-child {
+        font-size: 22px;
+    }
+    .home_pic .overlay .background-text a {
+        font-size: 1rem;
+    }
+}
 /*.carousel {
 	margin-left: 150px;
 }
