@@ -19,10 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/courses/{slug}', 'CoursesController@index')->name('courses');
+Route::post('/courses/{slug}', 'CoursesController@enroll');
 Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index')->name('quiz');
 Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
 Route::get('/search', 'SearchController@index');
 Route::get('/tracks/{name}', 'TrackController@index');
+Route::get('/mycourses', 'MycoursesController@index');
 
 // Admin Routes
 
