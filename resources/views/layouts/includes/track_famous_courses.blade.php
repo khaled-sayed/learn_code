@@ -52,7 +52,7 @@
 
 
 		@if($i == 2)
-
+        @auth
 			<div class="recommended-courses">
 
 				<h4>Recommended courses for you: </h4>
@@ -86,7 +86,7 @@
 				</div>
 
 			</div>
-
+                    @endauth
 		@endif
 
 

@@ -22,6 +22,7 @@ Route::get('/courses/{slug}', 'CoursesController@index')->name('courses');
 Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index')->name('quiz');
 Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
 Route::get('/search', 'SearchController@index');
+Route::get('/tracks/{name}', 'TrackController@index');
 
 // Admin Routes
 
