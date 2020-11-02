@@ -18,7 +18,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/courses/{slug}', 'CoursesController@index')->name('courses');
+Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index')->name('quiz');
+Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
+Route::get('/search', 'SearchController@index');
 
 // Admin Routes
 

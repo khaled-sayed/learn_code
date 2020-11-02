@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
     <div class="container-fluid">
-         
+
     <a class="navbar-brand" href="#"><span class="logo">LC</span> Learncode</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse links" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 search-form">
-        <input placeholder="find your course..." class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form action="/search" method="GET" class="form-inline my-2 my-lg-0 search-form">
+        <input name="q" placeholder="find your course..." class="form-control mr-sm-2" type="search" aria-label="Search">
     </form>
 
     <ul class="navbar-nav ml-auto">
@@ -37,7 +37,7 @@
             @endauth
         </li>
     </ul>
-    
+
   </div>
 </div>
 </nav>

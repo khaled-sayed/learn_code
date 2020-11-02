@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-12">
                         @if (session('status'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +45,7 @@
                                 @if (count($questions))
                                 @foreach ($questions as $question)
                                     <tr>
-                                    <td> <a href="{{route('questions.show', $question)}}">{{ Str::limit($question->title, 30)  }}</a></td>
+                                    <td> <a href="{{route('questions.edit', $question)}}">{{ Str::limit($question->title, 30)  }}</a></td>
                                     <td>{{ Str::limit($question->right_answer, 30) }}</td>
                                     <td>{{ $question->score }}</td>
                                     <td> <a href="{{route('quizzes.show', $question->quiz->id)}}">{{ Str::limit($question->quiz->name, 30) }}</a></td>
@@ -59,12 +59,12 @@
                                                         <form action="{{ route('questions.destroy', $question) }}" method="post">
                                                             @csrf
                                                             @method('delete')
-                                                            
+
                                                             <a class="dropdown-item" href="{{ route('questions.edit', $question) }}">{{ __('Edit') }}</a>
                                                             <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this Question ?") }}') ? this.parentElement.submit() : ''">
                                                                 {{ __('Delete') }}
                                                             </button>
-                                                        </form>  
+                                                        </form>
                                                 </div>
                                             </div>
                                         </td>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-            
+
         @include('layouts.footers.auth')
     </div>
 @endsection

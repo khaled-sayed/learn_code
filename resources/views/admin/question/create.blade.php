@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Questions Management')])
 
 @section('content')
-    @include('admin.users.partials.header', ['title' => __('Add Questions')])   
+    @include('admin.users.partials.header', ['title' => __('Add Questions')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -35,9 +35,7 @@
 
                                 <div class="form-group{{ $errors->has('answers') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Answers') }}</label>
-                                    <textarea name="answers" id="input-title" class="form-control form-control-alternative{{ $errors->has('answers') ? ' is-invalid' : '' }}" placeholder="{{ __('Answers') }}" required autofocus>
-                                        {{ old('answers') }}
-                                    </textarea>
+                                    <textarea name="answers" id="input-title" class="form-control form-control-alternative{{ $errors->has('answers') ? ' is-invalid' : '' }}" placeholder="{{ __('Answers') }}" required autofocus>{{ old('answers') }}</textarea>
 
                                     @if ($errors->has('answers'))
                                         <span class="invalid-feedback" role="alert">
@@ -49,7 +47,7 @@
                                     <div class="form-group{{ $errors->has('right_answer') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-title">{{ __('Right Answer') }}</label>
                                         <input type="text" name="right_answer" id="input-title" class="form-control form-control-alternative{{ $errors->has('right_answer') ? ' is-invalid' : '' }}" placeholder="{{ __('Right Answer') }}" value="{{ old('right_answer') }}" required autofocus>
-    
+
                                         @if ($errors->has('right_answer'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('right_answer') }}</strong>
@@ -68,6 +66,20 @@
                                     @if ($errors->has('score'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('score') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-track">{{ __('Type') }}</label>
+                                    <select name="type" class="custom-select" id="type" required>
+                                            <option value="text">Text</option>
+                                        <option value="checkbox">Checkbox</option>
+                                    </select>
+
+                                    @if ($errors->has('type'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('type') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -97,7 +109,7 @@
                 </div>
             </div>
         </div>
-        
+
         @include('layouts.footers.auth')
     </div>
 @endsection
